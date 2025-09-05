@@ -100,9 +100,9 @@ This fork includes the following commits from the original PR, adapted for Hyprl
 4. **Add cursor warp for workspace-changing shifts** - Cursor follows windows
 5. **Fix API compatibility** - Updated for Hyprland 0.50.1 API changes
 
-## Contributing
+## Disclaimer
 
-Feel free to open issues or submit pull requests. This fork aims to stay compatible with the latest Hyprland releases while maintaining the multimonitor functionality.
+This implementation was created by an LLM (Large Language Model) based on user prompts to achieve multimonitor movewindow functionality. The user provided the requirements and guided the implementation process, while the LLM handled the technical implementation, code integration, API compatibility fixes, and repository setup.
 
 ## License
 
