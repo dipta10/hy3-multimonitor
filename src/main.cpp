@@ -14,7 +14,10 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
 	PHANDLE = handle;
 
 #ifndef HY3_NO_VERSION_CHECK
-	if (GIT_COMMIT_HASH != std::string(__hyprland_api_get_hash())) {
+	const std::string COMPOSITOR_HASH = __hyprland_api_get_hash();
+	const std::string CLIENT_HASH = __hyprland_api_get_client_hash();
+
+	if (COMPOSITOR_HASH != CLIENT_HASH) {
 		HyprlandAPI::addNotification(
 		    PHANDLE,
 		    "[hy3] hy3 was compiled for a different version of hyprland; refusing to load.",
@@ -57,6 +60,9 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
 	CONF("tabs:col.active", INT, 0x4033ccff);
 	CONF("tabs:col.active.border", INT, 0xee33ccff);
 	CONF("tabs:col.active.text", INT, 0xffffffff);
+	CONF("tabs:col.active_alt_monitor", INT, 0x40606060);
+	CONF("tabs:col.active_alt_monitor.border", INT, 0xee808080);
+	CONF("tabs:col.active_alt_monitor.text", INT, 0xffffffff);
 	CONF("tabs:col.focused", INT, 0x40606060);
 	CONF("tabs:col.focused.border", INT, 0xee808080);
 	CONF("tabs:col.focused.text", INT, 0xffffffff);

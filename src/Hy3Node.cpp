@@ -702,17 +702,10 @@ std::string Hy3Node::debugNode() {
 	std::string addr = "0x" + std::to_string((size_t) this);
 	switch (this->data.type()) {
 	case Hy3NodeType::Window:
-		buf << "window(";
-		buf << std::hex << this;
-		buf << ") [hypr ";
-		buf << this->data.as_window();
-		buf << "] size ratio: ";
-		buf << this->size_ratio;
+		buf << "window(" << this << ") [hypr " << this->data.as_window().get() << "] size ratio: " << this->size_ratio;
 		break;
 	case Hy3NodeType::Group:
-		buf << "group(";
-		buf << std::hex << this;
-		buf << ") [";
+		buf << "group(" << this << ") [";
 
 		auto& group = this->data.as_group();
 		switch (group.layout) {
@@ -907,6 +900,16 @@ Hy3Node* Hy3Node::getImmediateSibling(ShiftDirection direction) {
 	}
 
 	return *list_sibling;
+}
+
+CMonitor* Hy3Node::getMonitor() {
+	if (this->data.is_window()) {
+		return this->data.as_window()->m_monitor.get();
+	} else {
+		auto& group = this->data.as_group();
+		if (group.children.empty()) return nullptr;
+		else return group.children.front()->getMonitor();
+	}
 }
 
 Axis getAxis(Hy3GroupLayout layout) {
